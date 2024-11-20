@@ -1,4 +1,5 @@
 ﻿using matchMaking.be.Dto.Player;
+using matchMaking.be.Exceptions;
 using matchMaking.be.Interfaces;
 using matchMaking.be.Mappers;
 using Microsoft.AspNetCore.Mvc;
@@ -11,11 +12,11 @@ namespace matchMaking.be.Controllers;
 public class PlayersController: ControllerBase
 {
     
-    private readonly IPlayerRepository _playerRepository;
+    private readonly IPlayerService _playerService;
 
-    public PlayersController(IPlayerRepository playerRepository)
+    public PlayersController(IPlayerService playerService)
     {
-        _playerRepository = playerRepository;
+        _playerService = playerService;
     }
 
 
@@ -23,14 +24,22 @@ public class PlayersController: ControllerBase
 
     public async Task<IActionResult> Create([FromBody] CreatePlayerRequestDto player)
     {
-        var playerCreated = await _playerRepository.CreatePlayer(player);
 
-        if (playerCreated == null)
+        try
         {
-            return BadRequest();
+            var createdPlayer = await _playerService.CreatePlayer(player);
+            return Ok(createdPlayer);
+        }
+        catch (PlayerAlredyExistsException e)
+        {
+            return BadRequest(new { error = e.Message });
+        }
+        catch (Exception e)
+        {
+            
+            return StatusCode(500, new { error = "An unexpected error occurred" });
         }
         
-        return Ok(playerCreated.FromModelToCreateResponse());
     }
 
 
@@ -38,14 +47,21 @@ public class PlayersController: ControllerBase
 
     public async Task<IActionResult> GetPlayerById([FromRoute] Guid id)
     {
-        var player = await _playerRepository.GetPlayerById(id);
-
-        if (player == null)
+        try
         {
-            return NotFound();
-        }
+            var player = await _playerService.GetPlayerById(id);
 
-        return Ok(player.FromModelToGetPlayerByIdResponse());
+            return Ok(player);
+        }
+        catch (PlayerNotFoundException ex)
+        {
+            return NotFound(new { error = ex.Message }); 
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { error = "An unexpected error occurred", details = ex.Message });
+        }
+     
     }
     
     
