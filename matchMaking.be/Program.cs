@@ -1,6 +1,7 @@
 using matchMaking.be.Context;
 using matchMaking.be.Interfaces;
 using matchMaking.be.Repository;
+using matchMaking.be.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +16,7 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<MatchmakingContext>(options => options.UseInMemoryDatabase("MatchmakingPlatformDb"));
 
 builder.Services.AddScoped<IPlayerRepository, PlayerRepository>();
+builder.Services.AddScoped<IPlayerService, PlayerService>();
 
 var app = builder.Build();
 
