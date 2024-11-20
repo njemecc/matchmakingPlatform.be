@@ -9,4 +9,5 @@ public interface IPlayerRepository
     Task<Player?> GetPlayerById(Guid playerId);
     
     Task<Player?> PlayerExists(string nickname);
+    Task UpdatePlayer(Player player);
 }
