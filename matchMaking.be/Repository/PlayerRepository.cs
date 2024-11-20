@@ -36,4 +36,11 @@ public class PlayerRepository : IPlayerRepository
         return playerModel;
         
     }
+
+    public async Task<Player?> GetPlayerById(Guid playerId)
+    {
+        var player = await _context.Players.FindAsync(playerId);
+
+        return player;
+    }
 }
