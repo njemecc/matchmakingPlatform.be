@@ -1,0 +1,6 @@
+@matchMaking.be_HostAddress = http://localhost:5017
+
+GET {{matchMaking.be_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
