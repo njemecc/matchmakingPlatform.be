@@ -37,4 +37,10 @@ public class PlayerRepository : IPlayerRepository
     {
         return  await _context.Players.FirstOrDefaultAsync(p => p.Nickname.Equals(nickname));
     }
+    
+    public async Task UpdatePlayer(Player player)
+    {
+        _context.Players.Update(player);
+        await _context.SaveChangesAsync();
+    }
 }
