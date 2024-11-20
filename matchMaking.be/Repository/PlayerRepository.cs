@@ -17,30 +17,24 @@ public class PlayerRepository : IPlayerRepository
         _context = context;
     }
 
-    public async Task<Player?> CreatePlayer(CreatePlayerRequestDto createPlayerRequestDto)
+    public async Task<Player?> CreatePlayer(Player player)
     {
-        
-        var playerExists = await _context.Players.AnyAsync(p => p.Nickname.Equals(createPlayerRequestDto.Nickname));
 
-        if (playerExists)
-        {
-            return null;
-        }
-
-
-        var playerModel = createPlayerRequestDto.FromCreateRequestDtoToModel();
-
-        await _context.Players.AddAsync(playerModel);
+        await _context.Players.AddAsync(player);
         await _context.SaveChangesAsync();
         
-        return playerModel;
+        return player;
         
     }
 
     public async Task<Player?> GetPlayerById(Guid playerId)
     {
-        var player = await _context.Players.FindAsync(playerId);
+        return  await _context.Players.FindAsync(playerId);
+        
+    }
 
-        return player;
+    public async Task<Player?> PlayerExists(string nickname)
+    {
+        return  await _context.Players.FirstOrDefaultAsync(p => p.Nickname.Equals(nickname));
     }
 }

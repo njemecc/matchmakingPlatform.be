@@ -5,6 +5,8 @@ namespace matchMaking.be.Interfaces;
 
 public interface IPlayerRepository
 {
-    Task<Player?> CreatePlayer(CreatePlayerRequestDto createPlayerRequestDto);
+    Task<Player?> CreatePlayer(Player player);
     Task<Player?> GetPlayerById(Guid playerId);
+    
+    Task<Player?> PlayerExists(string nickname);
 }
