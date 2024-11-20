@@ -19,8 +19,7 @@ public class PlayersController: ControllerBase
     }
 
 
-    [HttpPost]
-    [Route("/create")]
+    [HttpPost("/players/create")]
 
     public async Task<IActionResult> Create([FromBody] CreatePlayerRequestDto player)
     {
@@ -33,6 +32,24 @@ public class PlayersController: ControllerBase
         
         return Ok(playerCreated.FromModelToCreateResponse());
     }
+
+
+    [HttpGet("{id:guid}")]
+
+    public async Task<IActionResult> GetPlayerById([FromRoute] Guid id)
+    {
+        var player = await _playerRepository.GetPlayerById(id);
+
+        if (player == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(player.FromModelToGetPlayerByIdResponse());
+    }
+    
+    
+    
     
     
     
