@@ -23,7 +23,8 @@ builder.Services.AddScoped<IPlayerRepository, PlayerRepository>();
 builder.Services.AddScoped<IPlayerService, PlayerService>();
 builder.Services.AddScoped<ITeamRepository, TeamRepository>();
 builder.Services.AddScoped<ITeamService, TeamService>();
-
+builder.Services.AddScoped<IMatchService, MatchService>();
+builder.Services.AddScoped<IMatchRepository, MatchRepository>();
 
 
 

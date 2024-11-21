@@ -1,4 +1,5 @@
 ﻿using matchMaking.be.Dtos.Match;
+using matchMaking.be.Helpers;
 using matchMaking.be.Interfaces;
 using matchMaking.be.Models;
 
@@ -57,7 +58,7 @@ public class MatchService : IMatchService
             double r1 = player.Elo;
             double r2 = team2Players.Average(p => p.Elo); 
             double e = 1 / (1 + Math.Pow(10, (r2 - r1) / 400)); 
-            int k = KCalculaiton(player.HoursPlayed);
+            int k = Helper.KCalculaiton(player.HoursPlayed);
 
             double s = 0.5; 
             if (createMatchRequestDto.WinningTeamId == team1.Id)
@@ -100,12 +101,5 @@ public class MatchService : IMatchService
         return match;
     }
 
-    private int KCalculaiton(int hoursPlayed)
-    {
-        if (hoursPlayed < 500) return 50;
-        if (hoursPlayed < 1000) return 40;
-        if (hoursPlayed < 3000) return 30;
-        if (hoursPlayed < 5000) return 20;
-        return 10;
-    }
+    
 }

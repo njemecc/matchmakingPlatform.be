@@ -8,7 +8,7 @@ namespace matchMaking.be.Controllers;
 
 
 [ApiController]
-[Route("[controller]")]
+[Route("players")]
 public class PlayersController: ControllerBase
 {
     
@@ -20,7 +20,7 @@ public class PlayersController: ControllerBase
     }
 
 
-    [HttpPost("/players/create")]
+    [HttpPost("create")]
 
     public async Task<IActionResult> Create([FromBody] CreatePlayerRequestDto player)
     {
