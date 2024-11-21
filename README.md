@@ -30,13 +30,13 @@ To build and run the application, you need the following:
    git clone https://github.com/njemecc/matchmakingPlatform.be
    cd matchmaking.be
    ```
-   2. **Install Dependencies: Restore all required .NET dependencies:**
+2. **Install Dependencies: Restore all required .NET dependencies:**
 
    ```bash
    dotnet restore
    ```
 
-   3. **Build and Run application**
+3. **Build and Run application**
 
    ```bash
    dotnet build dotnet run
