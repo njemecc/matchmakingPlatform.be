@@ -42,4 +42,33 @@ To build and run the application, you need the following:
    dotnet build dotnet run
    ```
 
+
+## Features
+
+- **Player Management**: 
+  Manage players with the ability to add new players, retrieve player details, and track individual statistics such as:
+  - ELO rating.
+  - Total wins and losses.
+  - Total hours played.
+
+- **Team Management**: 
+  Create and manage teams with built-in validation, ensuring:
+  - Each team has exactly five players.
+  - Team names are unique.
+  - Players cannot belong to multiple teams.
+
+- **Match Management**: 
+  Add match results between two teams, supporting:
+  - Win, loss, or draw scenarios.
+  - Automatic updates to player statistics based on match outcomes.
+  - Validation for match duration and team existence.
+
+- **Dynamic ELO Calculation**: 
+  Automatically calculate and update player ELO ratings using the official ELO formula. The system adjusts:
+  - Player ratings based on match results (win, loss, or draw).
+  - ELO rating progression using a dynamic `K-factor` determined by total hours played.
+
+
+
+
    
